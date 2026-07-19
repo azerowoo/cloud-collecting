@@ -1,0 +1,668 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ========================================
+   DOCUMENT
+======================================== */
+
+html,
+body {
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background-color: #f5f5f7;
+
+  font-family: sans-serif;
+
+  -webkit-text-size-adjust: 100%;
+
+  touch-action: none;
+
+}
+
+
+/* ========================================
+   APP
+======================================== */
+
+#app {
+
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  background-color: #f5f5f7;
+
+}
+
+
+/* ========================================
+   CLOUD STAGE
+======================================== */
+
+#cloud-stage {
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  pointer-events: auto;
+
+}
+
+
+/* ========================================
+   CLOUD
+======================================== */
+
+.cloud {
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  display: block;
+
+  max-width: none;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  -webkit-user-drag: none;
+
+  pointer-events: auto;
+
+  will-change: transform;
+
+  transform-origin: center center;
+
+  /*
+    중요:
+    이미지 자체의 크기를 CSS가 강제로
+    재해석하지 않도록 함.
+  */
+
+  image-rendering: auto;
+
+  /*
+    transform 기반 이동 시
+    브라우저가 매번 layout을 다시 계산하지 않도록 함.
+  */
+
+  contain: layout style paint;
+
+}
+
+
+/* ========================================
+   SELECTED CLOUD
+======================================== */
+
+.cloud.selected {
+
+  z-index: 1000;
+
+  filter: brightness(0);
+
+  transition:
+
+    transform 0.7s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+
+    width 0.7s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+
+    filter 0.3s ease;
+
+}
+
+
+/* ========================================
+   OTHER CLOUDS
+======================================== */
+
+.cloud-fade {
+
+  opacity: 0.08;
+
+  transition:
+
+    opacity 0.6s ease;
+
+}
+
+
+/* ========================================
+   RAIN COUNTER
+======================================== */
+
+#rain-counter {
+
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 60px;
+
+  z-index: 5000;
+
+  transform: translateX(-50%);
+
+  white-space: nowrap;
+
+  color: #219DFF;
+
+  font-size: 18px;
+
+  font-weight: normal;
+
+  letter-spacing: 1px;
+
+  text-align: center;
+
+  pointer-events: none;
+
+}
+
+
+/* 숫자 */
+
+#rain-days {
+
+  color: #000000;
+
+  font-weight: bold;
+
+}
+
+
+/* ========================================
+   ARCHIVE TRIGGER
+======================================== */
+
+#archive-trigger {
+
+  position: fixed;
+
+  left: 50%;
+
+  bottom: 25px;
+
+  z-index: 5000;
+
+  transform: translateX(-50%);
+
+  border: none;
+
+  background: none;
+
+  padding: 0;
+
+  white-space: nowrap;
+
+  color: #000000;
+
+  font-family: inherit;
+
+  font-size: 18px;
+
+  font-weight: normal;
+
+  letter-spacing: 1px;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+
+}
+
+
+/* ========================================
+   MODAL OVERLAY
+======================================== */
+
+.modal-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 10000;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(
+    245,
+    245,
+    247,
+    0.72
+  );
+
+}
+
+
+/* ========================================
+   WORD MODAL
+======================================== */
+
+.word-modal {
+
+  width: min(
+    86vw,
+    360px
+  );
+
+  padding: 28px 22px 22px;
+
+  background: #f5f5f7;
+
+  border: 1px solid #000000;
+
+  text-align: center;
+
+}
+
+
+/* ========================================
+   MODAL TITLE
+======================================== */
+
+.modal-title {
+
+  margin-bottom: 20px;
+
+  color: #000000;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+
+  text-align: center;
+
+}
+
+
+/* ========================================
+   INPUT
+======================================== */
+
+#wordInput {
+
+  display: block;
+
+  width: 100%;
+
+  height: 44px;
+
+  padding: 0 12px;
+
+  border: 1px solid #000000;
+
+  border-radius: 0;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #000000;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  text-align: center;
+
+  -webkit-appearance: none;
+
+}
+
+
+#wordInput:focus {
+
+  outline: none;
+
+}
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+#exchangeBtn,
+#confirmBtn {
+
+  display: block;
+
+  width: 100%;
+
+  height: 44px;
+
+  margin-top: 14px;
+
+  border: 1px solid #000000;
+
+  border-radius: 0;
+
+  background: #000000;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+
+}
+
+
+/* ========================================
+   SAVE MODAL
+======================================== */
+
+.save-modal {
+
+  width: min(
+    86vw,
+    360px
+  );
+
+  padding: 28px 22px 22px;
+
+  background: #f5f5f7;
+
+  border: 1px solid #000000;
+
+  text-align: center;
+
+}
+
+
+/* ========================================
+   ARCHIVE PAGE
+======================================== */
+
+#archive-page {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9000;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: #f5f5f7;
+
+}
+
+
+/* ========================================
+   ARCHIVE HEADER
+======================================== */
+
+#archive-header {
+
+  flex: 0 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  width: 100%;
+
+  padding: 22px 20px 18px;
+
+  border-bottom: 1px solid #000000;
+
+}
+
+
+#archive-header h1 {
+
+  color: #000000;
+
+  font-size: 18px;
+
+  font-weight: normal;
+
+  letter-spacing: 1px;
+
+}
+
+
+#close-archive {
+
+  border: none;
+
+  background: none;
+
+  padding: 0;
+
+  color: #000000;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+
+}
+
+
+/* ========================================
+   ARCHIVE LIST
+======================================== */
+
+#archive-list {
+
+  display: grid;
+
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  column-gap: 10px;
+  row-gap: 24px;
+
+  overflow-y: auto;
+
+  padding: 20px 10px 40px;
+
+  -webkit-overflow-scrolling: touch;
+
+  touch-action: pan-y;
+
+}
+
+
+/* ========================================
+   ARCHIVE ITEM
+======================================== */
+
+.archive-item {
+
+  min-width: 0;
+
+  text-align: center;
+
+}
+
+
+/* ========================================
+   ARCHIVE IMAGE
+======================================== */
+
+.archive-item img {
+
+  display: block;
+
+  width: 100%;
+
+  max-width: 100%;
+
+  height: auto;
+
+  margin: 0 auto 10px;
+
+  object-fit: contain;
+
+}
+
+
+/* ========================================
+   ARCHIVE CLOUD NAME
+======================================== */
+
+.cloud-tag {
+
+  margin-bottom: 5px;
+
+  color: #000000;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+
+}
+
+
+/* ========================================
+   ARCHIVE WORD
+======================================== */
+
+.word-text {
+
+  color: #777777;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  word-break: keep-all;
+
+}
+
+
+/* ========================================
+   EMPTY ARCHIVE
+======================================== */
+
+.archive-empty {
+
+  grid-column: 1 / -1;
+
+  margin-top: 50px;
+
+  color: #999999;
+
+  font-size: 14px;
+
+  text-align: center;
+
+}
+
+
+/* ========================================
+   MOBILE-SPECIFIC ADJUSTMENT
+======================================== */
+
+@media (max-width: 480px) {
+
+
+  #rain-counter {
+
+    bottom: 58px;
+
+    font-size: 16px;
+
+  }
+
+
+  #archive-trigger {
+
+    bottom: 24px;
+
+    font-size: 16px;
+
+  }
+
+
+  #archive-header {
+
+    padding-left: 16px;
+
+    padding-right: 16px;
+
+  }
+
+
+  #archive-header h1 {
+
+    font-size: 16px;
+
+  }
+
+
+  #archive-list {
+
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  
+    column-gap: 8px;
+    row-gap: 24px;
+  
+    padding-left: 8px;
+    padding-right: 8px;
+  
+  }
+
+}
