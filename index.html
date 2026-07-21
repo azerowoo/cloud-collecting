@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
+
+  <title>Cloud Collecting</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       MAIN SCREEN
+  ========================== -->
+
+  <main id="app">
+
+    <!-- 구름이 생성되는 공간 -->
+    <div id="cloud-stage"></div>
+
+
+    <!-- 장마 날짜 -->
+    <div id="rain-counter">
+
+      장마
+      (
+      <span id="rain-days">0.0</span>
+      )
+      일째
+
+    </div>
+
+
+    <!-- 아카이브 진입 -->
+    <button
+      id="archive-trigger"
+      type="button"
+    >
+      [먹구름 채집장]
+    </button>
+
+  </main>
+
+
+  <!-- =========================
+       WORD EXCHANGE MODAL
+  ========================== -->
+
+  <div
+    id="wordModal"
+    class="modal-overlay"
+    style="display: none;"
+  >
+
+    <div class="word-modal">
+
+      <div class="modal-title">
+        먹구름 채집
+      </div>
+
+      <input
+        id="wordInput"
+        type="text"
+        maxlength="30"
+        autocomplete="off"
+        placeholder="먹구름과 교환할 당신의 단어는?"
+      >
+
+      <button
+        id="exchangeBtn"
+        type="button"
+      >
+        교환하기
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       SAVE CONFIRM MODAL
+  ========================== -->
+
+  <div
+    id="saveModal"
+    class="modal-overlay"
+    style="display: none;"
+  >
+
+    <div class="save-modal">
+
+      <div
+        id="saveModalTitle"
+        class="modal-title"
+      >
+      </div>
+
+      <button
+        id="confirmBtn"
+        type="button"
+      >
+        확인
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ARCHIVE PAGE
+  ========================== -->
+
+  <section
+    id="archive-page"
+    style="display: none;"
+  >
+
+    <header id="archive-header">
+
+      <h1>
+        먹구름 채집장
+      </h1>
+
+      <button
+        id="close-archive"
+        type="button"
+      >
+        닫기
+      </button>
+
+    </header>
+
+
+    <div id="archive-list"></div>
+
+  </section>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
