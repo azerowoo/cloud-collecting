@@ -20,7 +20,7 @@ const CONFIG = {
   MIN_SIZE: 28,
   MAX_SIZE: 65,
 
-  TOUCH_RADIUS: 150,
+  TOUCH_RADIUS: 130,
 
   // 둥둥 움직임 크기
   FLOAT_RADIUS_X: 14,
