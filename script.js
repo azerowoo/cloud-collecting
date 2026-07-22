@@ -20,7 +20,7 @@ const CONFIG = {
   MIN_SIZE: 28,
   MAX_SIZE: 65,
 
-  TOUCH_RADIUS: 130,
+  TOUCH_RADIUS: 150,
 
   // 둥둥 움직임 크기
   FLOAT_RADIUS_X: 14,
@@ -528,7 +528,7 @@ function handlePointerDown(event) {
       
     scatterFromTap(
       event.clientX,
-      event.ClientY
+      event.clientY
     );
 
   }
@@ -1152,21 +1152,14 @@ active: true
 
 
   selectedCloud =
-  null;
+    null;
 
 
-// 메인 화면으로 돌아온 뒤에도
-// 터치 회피 시스템을 정상적으로 초기화
-touchPoint.x = -9999;
-touchPoint.y = -9999;
-touchPoint.active = false;
+  state =
+    STATE.IDLE;
 
 
-state =
-  STATE.IDLE;
-
-
-renderArchive();
+  renderArchive();
 
 }
 
@@ -1254,7 +1247,7 @@ function renderArchive() {
     archiveList.innerHTML =
       `
       <p class="archive-empty">
-        아직 교환된 구름이 없습니다.
+        아직 교환된 먹구름이 없습니다.
       </p>
       `;
 
