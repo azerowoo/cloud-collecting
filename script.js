@@ -486,6 +486,13 @@ function handlePointerDown(event) {
   touchPoint.active =
     true;
 
+    setTimeout(() => {
+
+      touchPoint.active =
+        false;
+    
+    }, 180);
+
 
   const cloud =
     findCloudAtPoint(
@@ -525,12 +532,6 @@ function handlePointerDown(event) {
     lastTapTime =
       now;
 
-      
-    scatterFromTap(
-      event.clientX,
-      event.clientY
-    );
-
   }
 
 }
@@ -557,6 +558,7 @@ function scatterFromTap(x, y) {
       return;
     }
 
+
     const centerX =
       cloud.x +
       cloud.size / 2;
@@ -565,11 +567,13 @@ function scatterFromTap(x, y) {
       cloud.y +
       cloud.size / 2;
 
+
     const dx =
       centerX - x;
 
     const dy =
       centerY - y;
+
 
     const distance =
       Math.sqrt(
@@ -577,8 +581,10 @@ function scatterFromTap(x, y) {
         dy * dy
       );
 
+
+    // 터치 주변의 좁은 범위만 회피
     const radius =
-      220;
+      140;
 
 
     if (
@@ -591,9 +597,10 @@ function scatterFromTap(x, y) {
         distance / radius;
 
 
+      // 최대 약 70px 정도만 이동
       const pushDistance =
-        80 +
-        strength * 180;
+        20 +
+        strength * 50;
 
 
       const targetX =
@@ -616,7 +623,7 @@ function scatterFromTap(x, y) {
 
 
       cloud.element.style.transition =
-        "transform 1.4s cubic-bezier(.22,.61,.36,1)";
+        "transform 0.8s cubic-bezier(.22,.61,.36,1)";
 
 
       cloud.element.style.transform =
@@ -630,9 +637,9 @@ function scatterFromTap(x, y) {
       setTimeout(() => {
 
         cloud.element.style.transition =
-          "transform 2.5s ease-out";
+          "transform 1.5s ease-out";
 
-      }, 1400);
+      }, 800);
 
     }
 
