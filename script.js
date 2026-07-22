@@ -1152,14 +1152,21 @@ active: true
 
 
   selectedCloud =
-    null;
+  null;
 
 
-  state =
-    STATE.IDLE;
+// 메인 화면으로 돌아온 뒤에도
+// 터치 회피 시스템을 정상적으로 초기화
+touchPoint.x = -9999;
+touchPoint.y = -9999;
+touchPoint.active = false;
 
 
-  renderArchive();
+state =
+  STATE.IDLE;
+
+
+renderArchive();
 
 }
 

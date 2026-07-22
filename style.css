@@ -665,4 +665,18 @@ body {
   
   }
 
+  /* ========================================
+   EXCHANGED WORD
+======================================== */
+
+.placed-word {
+
+  font-size: 11px;
+
+  font-weight: normal;
+
+  white-space: nowrap;
+
+}
+
 }
