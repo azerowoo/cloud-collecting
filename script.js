@@ -65,6 +65,64 @@ let touchPoint = {
 
 let archiveData = [];
 
+// 하루 참여 제한
+const DAILY_LIMIT = 3;
+
+
+function getParticipationData() {
+
+  const today =
+    new Date().toISOString().slice(0,10);
+
+  const saved =
+    JSON.parse(
+      localStorage.getItem("cloudParticipation")
+    );
+
+
+  if (!saved || saved.date !== today) {
+
+    return {
+      date: today,
+      count: 0
+    };
+
+  }
+
+
+  return saved;
+
+}
+
+
+function canParticipate() {
+
+  const data =
+    getParticipationData();
+
+  return data.count < DAILY_LIMIT;
+
+}
+
+
+function increaseParticipation() {
+
+  const data =
+    getParticipationData();
+
+    if (data.count >= DAILY_LIMIT) {
+      return;
+    }
+    
+  data.count += 1;
+
+  localStorage.setItem(
+    "cloudParticipation",
+    JSON.stringify(data)
+  );
+
+}
+
 const clouds = [];
 
 let thunder = null;
@@ -933,8 +991,31 @@ function bindModalEvents() {
 
 function processExchange() {
 
-  if (!selectedCloud) return;
+  if (!selectedCloud) {
+    return;
+  }
 
+  if (!selectedCloud.idNum) {
+
+    console.error(
+      "선택된 구름 ID 없음",
+      selectedCloud
+    );
+
+    return;
+
+  }
+
+
+  if (!canParticipate()) {
+
+    alert(
+      "오늘의 먹구름 채집은 모두 완료했습니다.\n내일 다시 참여해주세요."
+    );
+
+    return;
+
+  }
 
   const word =
     wordInput ?
@@ -956,6 +1037,7 @@ function processExchange() {
   const cloudName =
     `먹구름${selectedCloud.idNum}`;
 
+    increaseParticipation();
 
   archiveData.push({
 
@@ -1161,6 +1243,8 @@ active: true
   selectedCloud =
     null;
 
+    lastTapCloud = null;
+    lastTapTime = 0;
 
   state =
     STATE.IDLE;
